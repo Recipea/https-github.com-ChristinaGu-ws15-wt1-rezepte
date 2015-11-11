@@ -1,9 +1,8 @@
 class CreateIngredients < ActiveRecord::Migration
   def change
     create_table :ingredients do |t|
+      t.string :decription
       t.string :name
-      t.string :description
-      t.long :id
 
       t.timestamps null: false
     end
