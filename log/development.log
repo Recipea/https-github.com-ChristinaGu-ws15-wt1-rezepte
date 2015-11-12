@@ -63,3 +63,58 @@ Migrating to CreateCategories (20151111145308)
   [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151111145308"]]
   [1m[36m (12.9ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "ingredients" ("decription", "created_at", "updated_at") VALUES (?, ?, ?)  [["decription", "This is Broccoli"], ["created_at", "2015-11-11 15:31:32.532873"], ["updated_at", "2015-11-11 15:31:32.532873"]]
+  [1m[36m (25.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Broccoli"], ["created_at", "2015-11-11 15:31:32.566903"], ["updated_at", "2015-11-11 15:31:32.566903"]]
+  [1m[35m (9.1ms)[0m  commit transaction
+  [1m[36mIngredient Load (4.0ms)[0m  [1mSELECT "ingredients".* FROM "ingredients"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateIngredients (20151112075535)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "ingredients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" varchar, "recipe_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+SQLite3::SQLException: table "ingredients" already exists: CREATE TABLE "ingredients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" varchar, "recipe_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateIngredients (20151112075535)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "ingredients" ADD "recipe_id" varchar[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151112075535"]]
+  [1m[36m (12.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AdaptRecipeTable (20151112080459)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mALTER TABLE "recipes" ADD "category_id" varchar[0m
+  [1m[35m (0.0ms)[0m  ALTER TABLE "recipes" ADD "description" varchar
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151112080459"]]
+  [1m[35m (25.2ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "lunch"], ["created_at", "2015-11-12 08:16:00.286054"], ["updated_at", "2015-11-12 08:16:00.286054"]]
+  [1m[36m (9.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "dinner"], ["created_at", "2015-11-12 08:16:00.303318"], ["updated_at", "2015-11-12 08:16:00.303318"]]
+  [1m[35m (20.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "snack"], ["created_at", "2015-11-12 08:16:00.324452"], ["updated_at", "2015-11-12 08:16:00.324452"]]
+  [1m[36m (20.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "breakfast"], ["created_at", "2015-11-12 08:16:00.347920"], ["updated_at", "2015-11-12 08:16:00.347920"]]
+  [1m[35m (11.2ms)[0m  commit transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "recipes" ("name", "category_id", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Vegetable Curry"], ["category_id", "#<Category:0x000000080a29d8>"], ["description", "This is a veggie curry"], ["created_at", "2015-11-12 08:16:00.419917"], ["updated_at", "2015-11-12 08:16:00.419917"]]
+  [1m[36m (15.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "recipes" ("name", "category_id", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pancakes"], ["category_id", "#<Category:0x00000007f759e8>"], ["description", "Delicious pancakes"], ["created_at", "2015-11-12 08:16:00.439034"], ["updated_at", "2015-11-12 08:16:00.439034"]]
+  [1m[35m (9.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "ingredients" ("decription", "name", "recipe_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["decription", "This is Broccoli"], ["name", "Broccoli"], ["recipe_id", "#<Recipe:0x00000007e01cb0>"], ["created_at", "2015-11-12 08:16:00.460063"], ["updated_at", "2015-11-12 08:16:00.460063"]]
+  [1m[36m (15.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "ingredients" ("decription", "name", "recipe_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["decription", "Not glutenfree"], ["name", "Flour"], ["recipe_id", "#<Recipe:0x00000007d98a30>"], ["created_at", "2015-11-12 08:16:00.479922"], ["updated_at", "2015-11-12 08:16:00.479922"]]
+  [1m[35m (22.1ms)[0m  commit transaction
+  [1m[36mIngredient Load (4.5ms)[0m  [1mSELECT "ingredients".* FROM "ingredients"[0m
+  [1m[35mRecipe Load (1.0ms)[0m  SELECT "recipes".* FROM "recipes"
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
